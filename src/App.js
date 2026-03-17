@@ -33,45 +33,26 @@ export const App = () => {
 						Контент соответственный шагу. Сейчас активен шаг 3
 					</div>
 					<ul className={styles["steps-list"]}>
+						{steps.map((step, index) => {
+							return (
+								<li
+									className={
+										styles["steps-item"] + " " + styles.done
+									}
+									key={step.id}
+								>
+									{/* Для того, чтобы вычислить необходимый класс используйте активный индекс, текущий индекс, а также тернарные операторы */}
+									<button
+										className={styles["steps-item-button"]}
+									>
+										{index + 1}
+									</button>
+									{/* При клике на кнопку установка выбранного шага в качестве активного */}
+									{step.title}
+								</li>
+							);
+						})}
 						{/* Выводите <li> с помощью массива steps и метода map(), подставляя в разметку нужные значения и классы */}
-						<li
-							className={styles["steps-item"] + " " + styles.done}
-						>
-							{/* Для того, чтобы вычислить необходимый класс используйте активный индекс, текущий индекс, а также тернарные операторы */}
-							<button className={styles["steps-item-button"]}>
-								1
-							</button>
-							{/* При клике на кнопку установка выбранного шага в качестве активного */}
-							Шаг 1
-						</li>
-						<li
-							className={styles["steps-item"] + " " + styles.done}
-						>
-							<button className={styles["steps-item-button"]}>
-								2
-							</button>
-							Шаг 2
-						</li>
-						<li
-							className={
-								styles["steps-item"] +
-								" " +
-								styles.done +
-								" " +
-								styles.active
-							}
-						>
-							<button className={styles["steps-item-button"]}>
-								3
-							</button>
-							Шаг 3
-						</li>
-						<li className={styles["steps-item"]}>
-							<button className={styles["steps-item-button"]}>
-								4
-							</button>
-							Шаг 4
-						</li>
 					</ul>
 					<div className={styles["buttons-container"]}>
 						<button
