@@ -69,25 +69,13 @@ export const App = () => {
 						>
 							Назад
 						</button>
-						{isOnLastStep ? (
-							<button
-								className={styles.button}
-								onClick={startOver}
-							>
-								Начать сначала
-								{/* "Начать сначала", можно сделать этой же кнопкой, просто подменять обработчик и текст в зависимости от условия */}
-								{/* Или заменять всю кнопку в зависимости от условия */}
-							</button>
-						) : (
-							<button
-								className={styles.button}
-								onClick={takeStepForward}
-							>
-								Далее
-								{/* "Начать сначала", можно сделать этой же кнопкой, просто подменять обработчик и текст в зависимости от условия */}
-								{/* Или заменять всю кнопку в зависимости от условия */}
-							</button>
-						)}
+
+						<button
+							className={styles.button}
+							onClick={isOnLastStep ? startOver : takeStepForward}
+						>
+							{isOnLastStep ? "Начать сначала" : "Далее"}
+						</button>
 					</div>
 				</div>
 			</div>
