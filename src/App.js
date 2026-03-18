@@ -6,22 +6,29 @@ export const App = () => {
 	// Можно задать 2 состояния — steps и activeIndex
 
 	// И определить 3 обработчика: Клик назад, Клик вперед, Начать сначала
-	let isOnFirstStep;
-	let isOnLastStep = false;
 
 	// И 2 переменных-флага — находимся ли мы на первом шаге, и находимся ли на последнем
-	const [steps, setStep] = useState(data);
+	const [steps, setSteps] = useState(data);
 	const [activeIndex, setActiveIndex] = useState(0);
 
 	function startOver() {
-		console.log("Начать сначала");
+		setActiveIndex(0);
 	}
 	function takeStepForward() {
-		console.log("Далее");
+		if (activeIndex !== steps.length - 1) {
+			setActiveIndex((prev) => prev + 1);
+		} else {
+			setActiveIndex(0);
+		}
 	}
 	function takeStepBack() {
-		console.log("Назад");
+		if (activeIndex > 0) {
+			setActiveIndex((prev) => prev - 1);
+		}
 	}
+
+	let isOnFirstStep = activeIndex === 0;
+	let isOnLastStep = activeIndex === steps.length - 1;
 
 	return (
 		<div className={styles.container}>
@@ -30,7 +37,7 @@ export const App = () => {
 				<div className={styles.steps}>
 					<div className={styles["steps-content"]}>
 						{/* Для получения активного контента использйте steps и activeIndex */}
-						Контент соответственный шагу. Сейчас активен шаг 3
+						{steps[activeIndex].content}
 					</div>
 					<ul className={styles["steps-list"]}>
 						{steps.map((step, index) => {
@@ -58,6 +65,7 @@ export const App = () => {
 						<button
 							className={styles.button}
 							onClick={takeStepBack}
+							disabled={isOnFirstStep}
 						>
 							Назад
 						</button>
