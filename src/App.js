@@ -41,16 +41,19 @@ export const App = () => {
 					</div>
 					<ul className={styles["steps-list"]}>
 						{steps.map((step, index) => {
+							let isActive = index === activeIndex;
+							let isDone = index <= activeIndex;
 							return (
 								<li
-									className={
-										styles["steps-item"] + " " + styles.done
-									}
+									className={`${styles["steps-item"]}
+										${isActive ? styles.active : ""}
+										${isDone ? styles.done : ""}`}
 									key={step.id}
 								>
 									{/* Для того, чтобы вычислить необходимый класс используйте активный индекс, текущий индекс, а также тернарные операторы */}
 									<button
 										className={styles["steps-item-button"]}
+										onClick={() => setActiveIndex(index)}
 									>
 										{index + 1}
 									</button>
